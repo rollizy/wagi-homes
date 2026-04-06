@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pannellum injects its own DOM — we need to override some styles */
+#panorama-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.pnlm-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Custom hotspot styles that override Pannellum defaults */
+.custom-hotspot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.15s ease;
+}
+
+.custom-hotspot:hover {
+  transform: scale(1.2);
+}
+
+.hotspot-room-link { background-color: #f97316; }   /* orange */
+.hotspot-product   { background-color: #3b82f6; }   /* blue  */
+.hotspot-info      { background-color: #10b981; }   /* green */
