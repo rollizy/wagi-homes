@@ -1,52 +1,40 @@
-// ─── Hotspot ─────────────────────────────────────────────────────────────────
-// A clickable point placed inside a 360° panorama image.
-// pitch/yaw are angles that tell Pannellum where to place the dot in 3D space.
+export type HotspotType = 'room_link' | 'feature' | 'material' | 'info'
 
-export type HotspotType = 'room_link' | 'product' | 'info'
+export type BuildStatus = 'Completed' | 'Under Construction' | 'Concept' | 'In Development'
 
 export interface Hotspot {
   id: string
-  pitch: number      // vertical angle  (-90 = floor, 90 = ceiling)
-  yaw: number        // horizontal angle (0 = front, ±180 = back)
+  pitch: number
+  yaw: number
   type: HotspotType
   label: string
 
-  // Only used when type === 'room_link'
+  // room_link
   target_room_id?: string
 
-  // Only used when type === 'product'
-  product_url?: string
-  product_price?: string       // e.g. "R 4 999"
-  product_retailer?: string    // e.g. "Mr Price Home"
-
-  // Only used when type === 'info'
+  // feature / material / info
   description?: string
+  detail_url?: string       // optional link to spec sheet, material source, etc.
 }
-
-// ─── Room ─────────────────────────────────────────────────────────────────────
-// One room inside a house. Each room has its own 360° panorama image and
-// a list of hotspots that appear inside that panorama.
 
 export interface Room {
   id: string
-  label: string               // e.g. "Main Bedroom"
-  panorama_url: string        // full URL to the equirectangular .jpg/.webp image
-  thumbnail_url?: string      // small preview image for the room nav bar
+  label: string
+  panorama_url: string
+  thumbnail_url?: string
   hotspots: Hotspot[]
 }
 
-// ─── House ───────────────────────────────────────────────────────────────────
-// One property. Each house gets its own /house/[id] URL.
-
 export interface House {
   id: string
-  name: string                // e.g. "Sandton Estate – Unit 14"
-  address: string             // e.g. "14 Acacia Drive, Sandton, GP"
+  name: string                  // project name e.g. "Ha Siwela"
+  title: string                 // subtitle e.g. "Private Retreat · Koro Creek"
+  location: string              // e.g. "Limpopo, South Africa"
   description?: string
-  cover_image_url?: string    // hero image shown on the listing card
-  bedrooms: number
-  bathrooms: number
-  size_sqm: number
-  price?: string              // e.g. "R 1 850 000"
+  cover_image_url?: string
+  date_designed: string         // e.g. "2022" or "March 2023"
+  build_status: BuildStatus
+  floor_area_sqm: number
+  typology: string              // e.g. "Private Residence", "Lodge", "Mixed-Use"
   rooms: Room[]
 }

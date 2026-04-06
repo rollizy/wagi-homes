@@ -9,6 +9,8 @@ const nextConfig = {
       // Cloudflare R2 — your production CDN
       { protocol: 'https', hostname: '**.r2.cloudflarestorage.com' },
       { protocol: 'https', hostname: '**.cloudflare.com' },
+      { protocol: 'https', hostname: '*.r2.dev' },
+      { protocol: 'https', hostname: 'pub-ba20e8c941504eaeab9c231e16fadea0.r2.dev' },
       // Add your own CDN domain here later, e.g.:
       // { protocol: 'https', hostname: 'cdn.wagihomes.co.za' },
     ],

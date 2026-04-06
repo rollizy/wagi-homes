@@ -14,8 +14,8 @@ interface Props {
 export default function RoomNav({ rooms, activeRoomId, onSelect }: Props) {
   return (
     <nav
-      className="shrink-0 border-t border-gray-800 bg-gray-900 px-4 py-2
-                 flex items-center gap-3 overflow-x-auto scrollbar-none"
+      className="shrink-0 border-t border-navy-600 bg-navy-800 px-4 py-2
+                 flex items-center gap-2 overflow-x-auto scrollbar-none"
       aria-label="Room navigation"
     >
       {rooms.map((room) => {
@@ -25,17 +25,17 @@ export default function RoomNav({ rooms, activeRoomId, onSelect }: Props) {
             key={room.id}
             onClick={() => onSelect(room)}
             className={clsx(
-              'flex flex-col items-center gap-1 shrink-0 rounded-xl px-3 py-2',
-              'transition-all duration-150 text-xs font-medium',
+              'flex flex-col items-center gap-1 shrink-0 px-4 py-2',
+              'transition-all duration-200 text-xs tracking-widest uppercase font-light',
+              'border',
               isActive
-                ? 'bg-brand-600 text-white'
-                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                ? 'border-ochre-500 text-ochre-400 bg-navy-700'
+                : 'border-transparent text-ochre-700 hover:border-navy-500 hover:text-ochre-500',
             )}
             aria-current={isActive ? 'true' : undefined}
           >
-            {/* Thumbnail (optional) */}
             {room.thumbnail_url ? (
-              <div className="relative w-14 h-10 rounded-lg overflow-hidden">
+              <div className="relative w-14 h-10 overflow-hidden">
                 <Image
                   src={room.thumbnail_url}
                   alt={room.label}
@@ -46,8 +46,8 @@ export default function RoomNav({ rooms, activeRoomId, onSelect }: Props) {
             ) : (
               <div
                 className={clsx(
-                  'w-14 h-10 rounded-lg flex items-center justify-center text-lg',
-                  isActive ? 'bg-brand-700' : 'bg-gray-800',
+                  'w-14 h-10 flex items-center justify-center text-lg',
+                  isActive ? 'bg-navy-600' : 'bg-navy-900',
                 )}
               >
                 {roomEmoji(room.label)}

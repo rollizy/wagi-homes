@@ -4,7 +4,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, MapPin } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import type { House, Room, Hotspot } from '@/lib/types'
 import PanoramaViewer from './PanoramaViewer'
 import RoomNav from './RoomNav'
@@ -26,8 +26,8 @@ export default function HouseTourClient({ house }: Props) {
         setActiveRoom(target)
       }
     } else {
-      // product or info — open the side panel
-      setActiveHotspot(hotspot)
+      // Toggle: clicking the same hotspot again closes the panel
+      setActiveHotspot((prev) => (prev?.id === hotspot.id ? null : hotspot))
     }
   }
 
@@ -37,26 +37,33 @@ export default function HouseTourClient({ house }: Props) {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-950 overflow-hidden">
+    <div className="flex flex-col h-screen bg-navy-900 overflow-hidden">
       {/* Top bar */}
-      <header className="flex items-center gap-3 px-4 py-3 border-b border-gray-800 shrink-0 z-10">
+      <header className="flex items-center gap-3 px-5 py-3 border-b border-navy-600 bg-navy-800 shrink-0 z-10">
         <Link
           href="/"
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-ochre-600 hover:text-ochre-400 transition-colors"
           aria-label="Back to listings"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={18} />
         </Link>
+        <div className="w-px h-5 bg-navy-600" />
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-semibold truncate">{house.name}</h1>
-          <p className="text-xs text-gray-400 flex items-center gap-1 truncate">
-            <MapPin size={10} />
-            {house.address}
+          <h1
+            className="text-sm font-light text-cream truncate"
+            style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.05em' }}
+          >
+            {house.name}
+          </h1>
+          <p className="text-xs text-ochre-600 truncate tracking-wide italic">
+            {house.title}
           </p>
         </div>
-        <span className="text-xs text-gray-500 hidden sm:block">
-          {activeRoom.label}
-        </span>
+        <div className="hidden sm:flex items-center gap-3 text-xs">
+          <span className="text-ochre-700 tracking-widest uppercase">{house.date_designed}</span>
+          <span className="w-px h-3 bg-navy-500" />
+          <span className="text-ochre-500 tracking-widest uppercase">{activeRoom.label}</span>
+        </div>
       </header>
 
       {/* Main viewer area */}

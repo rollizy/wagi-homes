@@ -73,26 +73,19 @@ function buildHotspot(
   hotspot: Hotspot,
   onClick: (h: Hotspot) => void,
 ): object {
-  const colorClass = {
-    room_link: 'hotspot-room-link',
-    product:   'hotspot-product',
-    info:      'hotspot-info',
-  }[hotspot.type]
+  const isNav = hotspot.type === 'room_link'
 
-  const icon = {
-    room_link: '→',
-    product:   '$',
-    info:      'i',
-  }[hotspot.type]
+  const cssClass = isNav ? 'custom-hotspot hotspot-room-link' : 'custom-hotspot hotspot-about'
+  const innerHTML = isNav ? '→' : 'About'
 
   return {
     pitch: hotspot.pitch,
     yaw:   hotspot.yaw,
     type:  'custom',
     text:  hotspot.label,
-    cssClass: `custom-hotspot ${colorClass}`,
+    cssClass,
     createTooltipFunc: (container: HTMLElement) => {
-      container.innerHTML = icon
+      container.innerHTML = innerHTML
       container.title = hotspot.label
     },
     clickHandlerFunc: () => onClick(hotspot),

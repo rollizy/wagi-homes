@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:yun.kujiale.com)"
+      "WebFetch(domain:yun.kujiale.com)",
+      "WebFetch(domain:www.instagram.com)"
     ]
   }
 }
